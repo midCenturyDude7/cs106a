@@ -28,19 +28,20 @@ DATA_DIR_BRAZIL = 'confirmed/brazil.txt'
 DATA_DIR_IRAN = 'confirmed/iran.txt'
 DATA_DIR_ITALY = 'confirmed/italy.txt'
 DATA_DIR_RUSSIA = 'confirmed/russia.txt'
+DATA_DIR_EGYPT = 'confirmed/egypt.txt'
 
 
 def main():
 
     # Intro output to console
-    print("Welcome! You have access to COVID-19 data from Jan-22 to May-09 for the following five countries:")
-    print("Belarus, Brazil, Iran, Italy, and Russia")
+    print("Welcome! You have access to COVID-19 data from Jan-22 to May-09 for the following six countries:")
+    print("Belarus, Brazil, Iran, Italy, Russia, and Egypt")
     print("Check back soon, as more countries will be made available for review!")
     print('')
 
     # List for the five available countries / file access
     available_countries = ['Belarus', 'belarus', 'Brazil', 'brazil', 'Iran',
-                           'iran', 'Italy', 'italy', 'Russia', 'russia']
+                           'iran', 'Italy', 'italy', 'Russia', 'russia', 'Egypt', 'egypt']
 
     # Loop that asks user to enter country name to access COVID-19 data
     while True:
@@ -67,6 +68,10 @@ def main():
         elif country_name == available_countries[8] or country_name == available_countries[9]:
             load_russia()
 
+        # Egypt
+        elif country_name == available_countries[10] or country_name == available_countries[11]:
+            load_egypt()
+
         # Conditional for incorrect input
         else:
             print("You do not have access to that file yet! It will be available soon.")
@@ -86,11 +91,18 @@ def load_belarus():
         country_sum = 0                                         # Creating variable to count total number of cases
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
-        for i in range(0, len(country_data_updated)):           # Find the total number of cases for the country
-            country_sum += int(country_data_updated[i])
-        max_country = max(country_data_updated)                 # Locates the max value in the list
+
+        new_cases = []                                          # Create an empty list to capture the DoD difference
+        for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
+            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+                new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
+
+        for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
+            country_sum += int(new_cases[i])
+        max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
         country_total_count = len(country_data_updated)         # Counts the total number of elements (days) in the list
+
         # Counts the total number of days with confirmed cases
         country_confirmed_cases = country_total_count - country_zero_count
 
@@ -103,7 +115,7 @@ def load_belarus():
         print("***COVID-19 DATA FOR BELARUS***")
         print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
         print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country) + " cases")
+        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -117,11 +129,18 @@ def load_brazil():
         country_sum = 0                                         # Creating variable to count total number of cases
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
-        for i in range(0, len(country_data_updated)):           # Find the total number of cases for the country
-            country_sum += int(country_data_updated[i])
-        max_country = max(country_data_updated)                 # Locates the max value in the list
+
+        new_cases = []                                          # Create an empty list to capture the DoD difference
+        for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
+            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+                new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
+
+        for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
+            country_sum += int(new_cases[i])
+        max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
         country_total_count = len(country_data_updated)         # Counts the total number of elements (days) in the list
+
         # Counts the total number of days with confirmed cases
         country_confirmed_cases = country_total_count - country_zero_count
 
@@ -134,7 +153,7 @@ def load_brazil():
         print("***COVID-19 DATA FOR BRAZIL***")
         print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
         print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country) + " cases")
+        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -148,11 +167,18 @@ def load_iran():
         country_sum = 0                                         # Creating variable to count total number of cases
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
-        for i in range(0, len(country_data_updated)):           # Find the total number of cases for the country
-            country_sum += int(country_data_updated[i])
-        max_country = max(country_data_updated)                 # Locates the max value in the list
+
+        new_cases = []
+        for i in range(len(country_data_updated) - 1):
+            if country_data_updated != 0:
+                new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))
+
+        for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
+            country_sum += int(new_cases[i])
+        max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
-        country_total_count = len(country_data_updated)         # Counts the total number of elements (days) in the list
+        country_total_count = len(new_cases)         # Counts the total number of elements (days) in the list
+
         # Counts the total number of days with confirmed cases
         country_confirmed_cases = country_total_count - country_zero_count
 
@@ -165,7 +191,7 @@ def load_iran():
         print("***COVID-19 DATA FOR IRAN***")
         print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
         print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country) + " cases")
+        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -196,7 +222,7 @@ def load_italy():
         print("***COVID-19 DATA FOR ITALY***")
         print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
         print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country) + " cases")
+        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -227,7 +253,46 @@ def load_russia():
         print("***COVID-19 DATA FOR RUSSIA***")
         print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
         print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country) + " cases")
+        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print('')
+
+
+def load_egypt():
+
+    # File access and having fun with the data :)
+    filename = 'egypt.txt'
+    with open(DATA_DIR_EGYPT, 'r') as f:                        # Open the file and read it
+        country_data = f.readlines()                            # Create a list from the array
+        country_data_updated = []                               # Empty list to manipulate data
+        country_sum = 0                                         # Creating variable to count total number of cases
+        for elem in country_data:                               # Remove the newline character from the list
+            country_data_updated.append(elem.strip())
+
+        new_cases = []                                          # Create an empty list to capture the DoD difference
+        for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
+            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
+                new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
+
+        for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
+            country_sum += int(new_cases[i])
+
+        max_country = max(new_cases)                 # Locates the max value in the list
+        country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
+        country_total_count = len(country_data_updated)         # Counts the total number of elements (days) in the list
+
+        # Counts the total number of days with confirmed cases
+        country_confirmed_cases = country_total_count - country_zero_count
+
+        # Output to console
+        print("***FILE INFORMATION FOR EGYPT.TXT***")
+        print("You've accessed the file: " + filename)
+        print("It is located in a relative directory in the following path: " + DATA_DIR_EGYPT)
+        print(filename + " contains " + str(country_total_count) + " total days")
+        print('')
+        print("***COVID-19 DATA FOR EGYPT***")
+        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
+        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
+        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
