@@ -31,20 +31,20 @@ DATA_DIR_RUSSIA = 'confirmed/russia.txt'
 DATA_DIR_EGYPT = 'confirmed/egypt.txt'
 DATA_DIR_KAZAKHSTAN = 'confirmed/kazakhstan.txt'
 DATA_DIR_GERMANY = 'confirmed/germany.txt'
-
+DATA_DIR_ARGENTINA = 'confirmed/argentina.txt'
 
 def main():
 
     # Intro output to console
-    print("Welcome! You have access to COVID-19 data from Jan-22 to May-09 for the following eight countries:")
-    print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, and Germany")
+    print("Welcome! You have access to COVID-19 data from Jan-22 to May-09 for the following nine countries:")
+    print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, Germany, and Argentina")
     print("Check back soon, as more countries will be made available for review!")
     print('')
 
     # List for the currently available countries / file access
     available_countries = ['Belarus', 'belarus', 'Brazil', 'brazil', 'Iran',
                            'iran', 'Italy', 'italy', 'Russia', 'russia', 'Egypt', 'egypt',
-                           'Kazakhstan', 'kazakhstan', 'Germany', 'germany']
+                           'Kazakhstan', 'kazakhstan', 'Germany', 'germany', 'Argentina', 'argentina']
 
     # Loop that asks user to enter country name to access COVID-19 data
     while True:
@@ -83,12 +83,16 @@ def main():
         elif country_name == available_countries[14] or country_name == available_countries[15]:
             load_germany()
 
+        # Argentina
+        elif country_name == available_countries[16] or country_name == available_countries[17]:
+            load_argentina()
+
         # Conditional for incorrect input
         else:
             print("You do not have access to that file yet! It will be available soon.")
             print("Please try again.")
             print("REMINDER: The following countries are currently available for review:")
-            print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, and Germany")
+            print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, Germany, and Argentina")
             print('')
 
 
@@ -397,6 +401,43 @@ def load_germany():
     print(filename + " contains " + str(country_total_count) + " total days")
     print('')
     print("***COVID-19 DATA FOR GERMANY***")
+    print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
+    print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
+    print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+    print('')
+
+
+def load_argentina():
+
+    filename = 'confirmed/argentina.txt'
+    with open(DATA_DIR_ARGENTINA, 'r') as f:
+        country_data = f.readlines()
+        country_data_updated = []
+        country_sum = 0
+    for elem in country_data:
+        country_data_updated.append(elem.strip())
+
+    new_cases = []
+    for i in range(len(country_data_updated) - 1):
+        if country_data_updated != 0:
+            new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))
+
+    for i in range(0, len(new_cases)):
+        country_sum += int(new_cases[i])
+
+    max_country = max(new_cases)
+    country_zero_count = country_data_updated.count('0')
+    country_total_count = len(country_data_updated)
+
+    country_confirmed_cases = country_total_count - country_zero_count
+
+    # Output to console
+    print("***FILE INFORMATION FOR ARGENTINA.TXT***")
+    print("You've accessed the file: " + filename)
+    print("It is located in a relative directory in the following path: " + DATA_DIR_ARGENTINA )
+    print(filename + " contains " + str(country_total_count) + " total days")
+    print('')
+    print("***COVID-19 DATA FOR ARGENTINA***")
     print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
     print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
     print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
