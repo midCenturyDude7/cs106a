@@ -410,11 +410,11 @@ def load_germany():
 def load_argentina():
 
     filename = 'confirmed/argentina.txt'
-    with open(DATA_DIR_ARGENTINA, 'r') as f:
-        country_data = f.readlines()
-        country_data_updated = []
-        country_sum = 0
-    for elem in country_data:
+    with open(DATA_DIR_ARGENTINA, 'r') as f:                    # Open the file and read it
+        country_data = f.readlines()                            # Create a list from the array
+        country_data_updated = []                               # Empty list to manipulate data
+        country_sum = 0                                         # Creating variable to count total number of cases
+    for elem in country_data:                                   # Remove the newline character from the list
         country_data_updated.append(elem.strip())
 
     new_cases = []
