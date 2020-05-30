@@ -20,6 +20,8 @@ Really can't say thank you enough! Everyone that contributed their time, energy 
 gratitude - and that is an understatement.
 """
 
+import os
+
 # Constants for each country's file that contains all confirmed cases
 # beginning with Jan-22 to early May
 DATA_DIR = 'confirmed/'
@@ -32,6 +34,7 @@ DATA_DIR_EGYPT = 'confirmed/egypt.txt'
 DATA_DIR_KAZAKHSTAN = 'confirmed/kazakhstan.txt'
 DATA_DIR_GERMANY = 'confirmed/germany.txt'
 DATA_DIR_ARGENTINA = 'confirmed/argentina.txt'
+
 
 def main():
 
@@ -54,6 +57,7 @@ def main():
         # Belarus
         if country_name == available_countries[0] or country_name == available_countries[1]:
             load_belarus()
+            load_dir()
 
         # Brazil
         elif country_name == available_countries[2] or country_name == available_countries[3]:
@@ -94,6 +98,17 @@ def main():
             print("REMINDER: The following countries are currently available for review:")
             print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, Germany, and Argentina")
             print('')
+
+
+def load_dir():
+
+    directory = os.fsencode(DATA_DIR)
+    filenames = []
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".txt"):
+            filenames.append(filename)
+        print(filenames)
 
 
 def load_belarus():
