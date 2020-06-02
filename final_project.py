@@ -110,7 +110,47 @@ def load_path():
                 current_file = f.readlines()
                 for elem in current_file:
                     data_list.append(elem.strip())
-    print(len(data_list))
+    updated_data_list = data_list[0:218]
+    zero_days = updated_data_list.count('0')
+    total_updated_data_list = len(updated_data_list)
+
+    zero_days_total = data_list.count('0')
+    total_data_list = len(data_list)
+
+    print("The first two countries have the following metrics:")
+    print("A total of " + str(zero_days) + " days of unconfirmed cases combined.")
+    print("A total of " + str(total_updated_data_list) + " days recorded across the first two countries between \
+           Jan-22 and May-09.")
+    print('')
+
+    print("All countries combined have the following metrics:")
+    print("A total of " + str(zero_days_total) + " days of unconfirmed cases across all 182 countries.")
+    print("A total of " + str(total_data_list) + " days recorded across all 182 countries between \
+           Jan-22 and May-09.")
+    print('')
+
+    # new_total_cases = []
+    # total_sum = 0
+    # for i in range(len(data_list) - 1):
+    #     if data_list[i] != 0:
+    #         new_total_cases.append(int(data_list[i+1]) - int(data_list[i]))
+    # print(max(new_total_cases))
+    # print(new_total_cases)
+
+    # updated_new_total_cases = []
+    # for elem in new_total_cases:
+    #     updated_new_total_cases.append(elem)
+    #
+    # for i in range(0, len(updated_new_total_cases)):
+    #     total_sum += int(updated_new_total_cases[i])
+    # max_total_cases = max(updated_new_total_cases)
+    # total_zero_count = data_list.count('0')
+    #
+    # # counts the total number of days with confirmed cases across all countries
+    # # sum_total_zero_count = max_total_cases - total_zero_count
+    #
+    # print(total_sum)
+    # print(max_total_cases)
 
 
 def load_dir():
