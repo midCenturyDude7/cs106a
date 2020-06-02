@@ -21,6 +21,7 @@ gratitude - and that is an understatement.
 """
 
 import os
+import pathlib
 
 # Constants for each country's file that contains all confirmed cases
 # beginning with Jan-22 to early May
@@ -57,7 +58,7 @@ def main():
         # Belarus
         if country_name == available_countries[0] or country_name == available_countries[1]:
             load_belarus()
-            load_dir()
+            load_path()
 
         # Brazil
         elif country_name == available_countries[2] or country_name == available_countries[3]:
@@ -100,15 +101,33 @@ def main():
             print('')
 
 
+def load_path():
+
+    data_list = []
+    for path in pathlib.Path(DATA_DIR).iterdir():
+        if path.is_file():
+            with open(str(path), 'r') as f:
+                current_file = f.readlines()
+                for elem in current_file:
+                    data_list.append(elem.strip())
+    print(len(data_list))
+
+
 def load_dir():
 
     directory = os.fsencode(DATA_DIR)
-    filenames = []
+    # filenames = []
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.endswith(".txt"):
-            filenames.append(filename)
-        print(filenames)
+            # filenames.append(filename)
+            with open(filename, 'r') as f:
+                all_countries_data = f.readlines()
+                all_countries_data_updated = []
+                for elem in all_countries_data:
+                    all_countries_data_updated.append(elem.strip())
+                print(len(all_countries_data_updated))
+    # print(filenames)
 
 
 def load_belarus():
