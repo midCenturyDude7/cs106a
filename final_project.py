@@ -114,19 +114,43 @@ def load_path():
     zero_days = updated_data_list.count('0')
     total_updated_data_list = len(updated_data_list)
 
+    new_cases_small = []
+    two_countries_sum = 0
+    for i in range(len(updated_data_list) - 1):
+        if updated_data_list != 0:
+            new_cases_small.append(int(updated_data_list[i+1]) - int(updated_data_list[i]))
+
+    new_cases_total = []
+    total_countries_sum = 0
+    for i in range(len(data_list) - 1):
+        if data_list != '0':
+            new_cases_total.append(int(data_list[i+1]) - int(data_list[i]))
+
+    max_total_small = max(new_cases_small)
+    max_total_all = max(new_cases_total)
+
+    max_index_value = int(new_cases_total.index(36188))
+
     zero_days_total = data_list.count('0')
     total_data_list = len(data_list)
 
-    print("The first two countries have the following metrics:")
+    total_confirmed_cases = total_data_list - zero_days_total
+    percentage_total_confirmed_cases = int((zero_days_total / total_confirmed_cases) * 100)
+
+    print("***COMPARISON METRICS: FIRST TWO COUNTRIES IN DIRECTORY***")
+    print("The first two countries in the directory have the following metrics:")
+    print("A total of " + str(total_updated_data_list) + " days recorded across the first two countries between Jan-22 and May-09.")
     print("A total of " + str(zero_days) + " days of unconfirmed cases combined.")
-    print("A total of " + str(total_updated_data_list) + " days recorded across the first two countries between \
-           Jan-22 and May-09.")
+    print("The largest one day increase for the first two countries was: " + str(max_total_small) + " cases.")
     print('')
 
+    print("***COMPARISON METRICS: ALL COUNTRIES IN DIRECTORY***")
     print("All countries combined have the following metrics:")
+    print("A total of " + str(total_data_list) + " days recorded across all 182 countries between Jan-22 and May-09.")
     print("A total of " + str(zero_days_total) + " days of unconfirmed cases across all 182 countries.")
-    print("A total of " + str(total_data_list) + " days recorded across all 182 countries between \
-           Jan-22 and May-09.")
+    print("A total of " + str(total_confirmed_cases) + " days of confirmed cases across all 182 countries, or " + str(percentage_total_confirmed_cases) + "%")
+    print("The largest one day increase for all 182 countries was: " + str(max_total_all) + " cases.")
+    print("The largest one day increase occurred at the following index value: " + str(max_index_value) + ", and this is the United States")
     print('')
 
     # new_total_cases = []
@@ -151,23 +175,6 @@ def load_path():
     #
     # print(total_sum)
     # print(max_total_cases)
-
-
-def load_dir():
-
-    directory = os.fsencode(DATA_DIR)
-    # filenames = []
-    for file in os.listdir(directory):
-        filename = os.fsdecode(file)
-        if filename.endswith(".txt"):
-            # filenames.append(filename)
-            with open(filename, 'r') as f:
-                all_countries_data = f.readlines()
-                all_countries_data_updated = []
-                for elem in all_countries_data:
-                    all_countries_data_updated.append(elem.strip())
-                print(len(all_countries_data_updated))
-    # print(filenames)
 
 
 def load_belarus():
