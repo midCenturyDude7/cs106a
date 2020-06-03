@@ -20,7 +20,6 @@ Really can't say thank you enough! Everyone that contributed their time, energy 
 gratitude - and that is an understatement.
 """
 
-import os
 import pathlib
 
 # Constants for each country's file that contains all confirmed cases
@@ -48,17 +47,17 @@ def main():
     # List for the currently available countries / file access
     available_countries = ['Belarus', 'belarus', 'Brazil', 'brazil', 'Iran',
                            'iran', 'Italy', 'italy', 'Russia', 'russia', 'Egypt', 'egypt',
-                           'Kazakhstan', 'kazakhstan', 'Germany', 'germany', 'Argentina', 'argentina']
+                           'Kazakhstan', 'kazakhstan', 'Germany', 'germany', 'Argentina', 'argentina',
+                           'All', 'all']
 
     # Loop that asks user to enter country name to access COVID-19 data
     while True:
-        country_name = input("Choose a country: ")
+        country_name = input("Choose an available country, or type 'All' for COVID-19 data on all 182 countries combined: ")
         print('')
 
         # Belarus
         if country_name == available_countries[0] or country_name == available_countries[1]:
             load_belarus()
-            load_path()
 
         # Brazil
         elif country_name == available_countries[2] or country_name == available_countries[3]:
@@ -92,6 +91,10 @@ def main():
         elif country_name == available_countries[16] or country_name == available_countries[17]:
             load_argentina()
 
+        # All Countries
+        elif country_name == available_countries[18] or country_name == available_countries[19]:
+            load_path()
+
         # Conditional for incorrect input
         else:
             print("You do not have access to that file yet! It will be available soon.")
@@ -103,78 +106,40 @@ def main():
 
 def load_path():
 
-    data_list = []
-    for path in pathlib.Path(DATA_DIR).iterdir():
-        if path.is_file():
+    data_list = []                                                          # Initializes list to store all data in
+    for path in pathlib.Path(DATA_DIR).iterdir():                           # every file in the directory as an one-
+        if path.is_file():                                                  # dimensional array, data_list
             with open(str(path), 'r') as f:
                 current_file = f.readlines()
                 for elem in current_file:
                     data_list.append(elem.strip())
-    updated_data_list = data_list[0:218]
-    zero_days = updated_data_list.count('0')
-    total_updated_data_list = len(updated_data_list)
 
-    new_cases_small = []
-    two_countries_sum = 0
-    for i in range(len(updated_data_list) - 1):
-        if updated_data_list != 0:
-            new_cases_small.append(int(updated_data_list[i+1]) - int(updated_data_list[i]))
+    new_cases_total = []                                                    # Initializes list to store newly confirmed
+    total_countries_sum = 0                                                 # cases
 
-    new_cases_total = []
-    total_countries_sum = 0
-    for i in range(len(data_list) - 1):
-        if data_list != '0':
+    for i in range(len(data_list) - 1):                                     # Loops through data_list and creates new
+        if data_list[i] != '0':                                             # list of confirmed cases day-over-day
             new_cases_total.append(int(data_list[i+1]) - int(data_list[i]))
 
-    max_total_small = max(new_cases_small)
-    max_total_all = max(new_cases_total)
+    for i in range(len(new_cases_total)):                                   # Loops through day-over-day confirmed
+        if new_cases_total[i] >= 1:                                         # cases and sums the total number of
+            total_countries_sum += new_cases_total[i]                       # confirmed cases for all 182 countries
 
-    max_index_value = int(new_cases_total.index(36188))
+    max_total_all = max(new_cases_total)                                    # Largest one-day increase for 182 countries
+    # max_index_value = int(new_cases_total.index(36188))                   # Index value of 18949
+    zero_days_total = data_list.count('0')                                  # Total number of days for unconfirmed cases
+    total_data_list = len(data_list)                                        # Total number of days recorded
+    total_confirmed_cases = total_data_list - zero_days_total               # Total number of days for confirmed cases
+    percentage_total_confirmed_cases = int((zero_days_total / total_confirmed_cases) * 100)  # % - confirmed/unconfirmed
 
-    zero_days_total = data_list.count('0')
-    total_data_list = len(data_list)
-
-    total_confirmed_cases = total_data_list - zero_days_total
-    percentage_total_confirmed_cases = int((zero_days_total / total_confirmed_cases) * 100)
-
-    print("***COMPARISON METRICS: FIRST TWO COUNTRIES IN DIRECTORY***")
-    print("The first two countries in the directory have the following metrics:")
-    print("A total of " + str(total_updated_data_list) + " days recorded across the first two countries between Jan-22 and May-09.")
-    print("A total of " + str(zero_days) + " days of unconfirmed cases combined.")
-    print("The largest one day increase for the first two countries was: " + str(max_total_small) + " cases.")
-    print('')
-
-    print("***COMPARISON METRICS: ALL COUNTRIES IN DIRECTORY***")
+    print("***COMPARISON METRICS***")
     print("All countries combined have the following metrics:")
     print("A total of " + str(total_data_list) + " days recorded across all 182 countries between Jan-22 and May-09.")
     print("A total of " + str(zero_days_total) + " days of unconfirmed cases across all 182 countries.")
     print("A total of " + str(total_confirmed_cases) + " days of confirmed cases across all 182 countries, or " + str(percentage_total_confirmed_cases) + "%")
-    print("The largest one day increase for all 182 countries was: " + str(max_total_all) + " cases.")
-    print("The largest one day increase occurred at the following index value: " + str(max_index_value) + ", and this is the United States")
+    print("The largest one day increase for all 182 countries was: " + str(max_total_all) + " cases, which occurred in the United States")
+    print("The overall total number of confirmed COVID-19 cases for all 182 countries from Jan-22 to May-09 is: " + str(total_countries_sum))
     print('')
-
-    # new_total_cases = []
-    # total_sum = 0
-    # for i in range(len(data_list) - 1):
-    #     if data_list[i] != 0:
-    #         new_total_cases.append(int(data_list[i+1]) - int(data_list[i]))
-    # print(max(new_total_cases))
-    # print(new_total_cases)
-
-    # updated_new_total_cases = []
-    # for elem in new_total_cases:
-    #     updated_new_total_cases.append(elem)
-    #
-    # for i in range(0, len(updated_new_total_cases)):
-    #     total_sum += int(updated_new_total_cases[i])
-    # max_total_cases = max(updated_new_total_cases)
-    # total_zero_count = data_list.count('0')
-    #
-    # # counts the total number of days with confirmed cases across all countries
-    # # sum_total_zero_count = max_total_cases - total_zero_count
-    #
-    # print(total_sum)
-    # print(max_total_cases)
 
 
 def load_belarus():
@@ -190,7 +155,7 @@ def load_belarus():
 
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
-            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
                 new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
@@ -228,7 +193,7 @@ def load_brazil():
 
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
-            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
                 new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
@@ -267,7 +232,7 @@ def load_iran():
 
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
-            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
                 new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
@@ -306,7 +271,7 @@ def load_italy():
 
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
-            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
                 new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
@@ -345,7 +310,7 @@ def load_russia():
 
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
-            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
                 new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
@@ -423,7 +388,7 @@ def load_kazakhstan():
 
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
-            if country_data_updated != 0:                       # non-zero days and capture the difference in cases
+            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
                 new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
@@ -462,7 +427,7 @@ def load_germany():
 
     new_cases = []                                              # Create an empty list to capture the DoD difference
     for i in range(len(country_data_updated) - 1):              # Iterate over the updated country data to eliminate
-        if country_data != 0:                                   # non-zero days and capture the difference in cases
+        if country_data_updated[i] != 0:                        # non-zero days and capture the difference in cases
             new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i])) # on a day-to day basis
 
     for i in range(0, len(new_cases)):                          # Find the total number of cases for the country
@@ -500,7 +465,7 @@ def load_argentina():
 
     new_cases = []
     for i in range(len(country_data_updated) - 1):
-        if country_data_updated != 0:
+        if country_data_updated[i] != 0:
             new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))
 
     for i in range(0, len(new_cases)):
