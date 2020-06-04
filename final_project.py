@@ -154,14 +154,14 @@ def load_path():
     percentage_total_confirmed_cases = int((zero_days_total / total_confirmed_cases) * 100)  # % - confirmed/unconfirmed
 
     print("***COMPARISON METRICS***")
-    print("All countries combined have the following metrics:")
-    print("A total of " + str(total_data_list) + " days recorded across all 182 countries between Jan-22 and May-09")
-    print("A total of " + str(zero_days_total) + " days of unconfirmed cases across all 182 countries")
-    print("A total of " + str(total_confirmed_cases) + " days of confirmed cases across all 182 countries, or " + str(
-        percentage_total_confirmed_cases) + "%")
-    print("The largest one day increase for all 182 countries was: " + str(
-        max_total_all) + " cases, which occurred in the United States")
-    print("The overall total number of confirmed COVID-19 cases for all 182 countries from Jan-22 to May-09 is: " + str(
+    print("For the dates encompassing Jan-22 to May-09, all 182 countries combined have the following metrics:")
+    print(" <> A total of " + str(total_data_list) + " days recorded")
+    print(" <> A total of " + str(zero_days_total) + " days of unconfirmed cases")
+    print(" <> A total of " + str(total_confirmed_cases) + " days of confirmed cases, or " + str(
+        percentage_total_confirmed_cases) + "% of the 109 day period")
+    print(" <> The largest one day increase of confirmed cases is: " + str(
+        max_total_all) + " cases -- which occurred in the United States")
+    print(" <> The overall total number of confirmed cases is: " + str(
         total_countries_sum))
     print('')
 
@@ -200,13 +200,15 @@ def load_belarus():
         print("***FILE INFORMATION FOR BELARUS.TXT***")
         print("You've accessed the file: " + filename)
         print("It is located in a relative directory in the following path: " + DATA_DIR_BELARUS)
-        print(filename + " contains " + str(country_total_count) + " total days")
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
         print('')
         print("***COVID-19 DATA FOR BELARUS***")
-        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> The " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -245,13 +247,15 @@ def load_brazil():
         print("***FILE INFORMATION FOR BRAZIL.TXT***")
         print("You've accessed the file: " + filename)
         print("It is located in a relative directory in the following path: " + DATA_DIR_BRAZIL)
-        print(filename + " contains " + str(country_total_count) + " total days")
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
         print('')
         print("***COVID-19 DATA FOR BRAZIL***")
-        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> The " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -290,13 +294,15 @@ def load_iran():
         print("***FILE INFORMATION FOR IRAN.TXT***")
         print("You've accessed the file: " + filename)
         print("It is located in a relative directory in the following path: " + DATA_DIR_IRAN)
-        print(filename + " contains " + str(country_total_count) + " total days")
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
         print('')
         print("***COVID-19 DATA FOR IRAN***")
-        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> The " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -335,13 +341,15 @@ def load_italy():
         print("***FILE INFORMATION FOR ITALY.TXT***")
         print("You've accessed the file: " + filename)
         print("It is located in a relative directory in the following path: " + DATA_DIR_ITALY)
-        print(filename + " contains " + str(country_total_count) + " total days")
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
         print('')
         print("***COVID-19 DATA FOR ITALY***")
-        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> The " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -380,13 +388,15 @@ def load_russia():
         print("***FILE INFORMATION FOR RUSSIA.TXT***")
         print("You've accessed the file: " + filename)
         print("It is located in a relative directory in the following path: " + DATA_DIR_RUSSIA)
-        print(filename + " contains " + str(country_total_count) + " total days")
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
         print('')
         print("***COVID-19 DATA FOR RUSSIA***")
-        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> The " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -425,13 +435,15 @@ def load_egypt():
         print("***FILE INFORMATION FOR EGYPT.TXT***")
         print("You've accessed the file: " + filename)
         print("It is located in a relative directory in the following path: " + DATA_DIR_EGYPT)
-        print(filename + " contains " + str(country_total_count) + " total days")
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
         print('')
         print("***COVID-19 DATA FOR EGYPT***")
-        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> The " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -470,13 +482,15 @@ def load_kazakhstan():
         print("***FILE INFORMATION FOR KAZAKHSTAN.TXT***")
         print("You've accessed the file: " + filename)
         print("It is located in a relative directory in the following path: " + DATA_DIR_KAZAKHSTAN)
-        print(filename + " contains " + str(country_total_count) + " total days")
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
         print('')
         print("***COVID-19 DATA FOR KAZAKHSTAN***")
-        print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-        print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-        print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> The " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
 
 
@@ -515,13 +529,15 @@ def load_germany():
     print("***FILE INFORMATION FOR GERMANY.TXT***")
     print("You've accessed the file: " + filename)
     print("It is located in a relative directory in the following path: " + DATA_DIR_GERMANY)
-    print(filename + " contains " + str(country_total_count) + " total days")
+    print("The file, " + filename + " contains " + str(country_total_count) + " total days")
     print('')
     print("***COVID-19 DATA FOR GERMANY***")
-    print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-    print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-    print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-    print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+    print("For the dates encompassing Jan-22 to May-09:")
+    print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+    print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+    print(" <> The " + country_name + " has " + str(
+        percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+    print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
     print('')
 
 
@@ -529,7 +545,7 @@ def load_argentina():
 
     country_name = 'Argentina'
 
-    filename = 'confirmed/argentina.txt'
+    filename = 'argentina.txt'
     with open(DATA_DIR_ARGENTINA, 'r') as f:                    # Open the file and read it
         country_data = f.readlines()                            # Create a list from the array
         country_data_updated = []                               # Empty list to manipulate data
@@ -559,13 +575,15 @@ def load_argentina():
     print("***FILE INFORMATION FOR ARGENTINA.TXT***")
     print("You've accessed the file: " + filename)
     print("It is located in a relative directory in the following path: " + DATA_DIR_ARGENTINA )
-    print(filename + " contains " + str(country_total_count) + " total days")
+    print("The file, " + filename + " contains " + str(country_total_count) + " total days")
     print('')
     print("***COVID-19 DATA FOR ARGENTINA***")
-    print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-    print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-    print(country_name + " has " + str(percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-    print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+    print("For the dates encompassing Jan-22 to May-09:")
+    print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+    print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+    print(" <> The " + country_name + " has " + str(
+        percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+    print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
     print('')
 
 
@@ -574,7 +592,7 @@ def load_us():
     country_name = 'United States'
 
     # File access and having fun with the data :)
-    filename = 'confirmed/us.txt'
+    filename = 'us.txt'
     with open(DATA_DIR_US, 'r') as f:                           # Open the file and read it
         country_data = f.readlines()                            # Create a list from the array
         country_data_updated= []                                # Empty list to manipulate data
@@ -604,14 +622,15 @@ def load_us():
     print("***FILE INFORMATION FOR US.TXT***")
     print("You've accessed the file: " + filename)
     print("It is located in a relative directory in the following path: " + DATA_DIR_US )
-    print(filename + " contains " + str(country_total_count) + " total days")
+    print("The file, " + filename + " contains " + str(country_total_count) + " total days")
     print('')
     print("***COVID-19 DATA FOR USA***")
-    print("The total number of days with confirmed COVID-19 cases is: " + str(country_confirmed_cases))
-    print("The overall total number of COVID-19 cases from Jan-22 to May-09 is: " + str(country_sum))
-    print("The " + country_name + " has " + str(
+    print("For the dates encompassing Jan-22 to May-09:")
+    print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+    print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+    print(" <> The " + country_name + " has " + str(
         percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-    print("The day with the most number of confirmed cases registered a total of: " + str(max_country))
+    print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
     print('')
 
 
