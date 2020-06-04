@@ -157,9 +157,12 @@ def load_path():
     print("All countries combined have the following metrics:")
     print("A total of " + str(total_data_list) + " days recorded across all 182 countries between Jan-22 and May-09")
     print("A total of " + str(zero_days_total) + " days of unconfirmed cases across all 182 countries")
-    print("A total of " + str(total_confirmed_cases) + " days of confirmed cases across all 182 countries, or " + str(percentage_total_confirmed_cases) + "%")
-    print("The largest one day increase for all 182 countries was: " + str(max_total_all) + " cases, which occurred in the United States")
-    print("The overall total number of confirmed COVID-19 cases for all 182 countries from Jan-22 to May-09 is: " + str(total_countries_sum))
+    print("A total of " + str(total_confirmed_cases) + " days of confirmed cases across all 182 countries, or " + str(
+        percentage_total_confirmed_cases) + "%")
+    print("The largest one day increase for all 182 countries was: " + str(
+        max_total_all) + " cases, which occurred in the United States")
+    print("The overall total number of confirmed COVID-19 cases for all 182 countries from Jan-22 to May-09 is: " + str(
+        total_countries_sum))
     print('')
 
 
