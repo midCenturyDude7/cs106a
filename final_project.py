@@ -4,7 +4,7 @@
 
 """
 File: final_project.py
-In its current form, this VERY BASIC program works with COVID-19 data from five countries and allows the user
+In its current form, this VERY BASIC program works with COVID-19 data from 10 countries and allows the user
 to access data based on choosing which country he/she would like to see data about.
 ***
 NEXT STEPS:
