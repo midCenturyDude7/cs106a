@@ -206,7 +206,7 @@ def load_belarus():
         print("For the dates encompassing Jan-22 to May-09:")
         print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
         print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> The " + country_name + " has " + str(
+        print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
@@ -253,7 +253,7 @@ def load_brazil():
         print("For the dates encompassing Jan-22 to May-09:")
         print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
         print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> The " + country_name + " has " + str(
+        print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
@@ -300,7 +300,7 @@ def load_iran():
         print("For the dates encompassing Jan-22 to May-09:")
         print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
         print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> The " + country_name + " has " + str(
+        print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
@@ -347,7 +347,7 @@ def load_italy():
         print("For the dates encompassing Jan-22 to May-09:")
         print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
         print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> The " + country_name + " has " + str(
+        print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
@@ -394,7 +394,7 @@ def load_russia():
         print("For the dates encompassing Jan-22 to May-09:")
         print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
         print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> The " + country_name + " has " + str(
+        print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
@@ -441,7 +441,7 @@ def load_egypt():
         print("For the dates encompassing Jan-22 to May-09:")
         print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
         print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> The " + country_name + " has " + str(
+        print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
@@ -488,7 +488,7 @@ def load_kazakhstan():
         print("For the dates encompassing Jan-22 to May-09:")
         print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
         print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> The " + country_name + " has " + str(
+        print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
@@ -535,7 +535,7 @@ def load_germany():
     print("For the dates encompassing Jan-22 to May-09:")
     print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
     print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-    print(" <> The " + country_name + " has " + str(
+    print(" <> " + country_name + " has " + str(
         percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
     print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
     print('')
@@ -581,7 +581,7 @@ def load_argentina():
     print("For the dates encompassing Jan-22 to May-09:")
     print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
     print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-    print(" <> The " + country_name + " has " + str(
+    print(" <> " + country_name + " has " + str(
         percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
     print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
     print('')
@@ -589,7 +589,7 @@ def load_argentina():
 
 def load_us():
 
-    country_name = 'United States'
+    country_name = 'The United States'
 
     # File access and having fun with the data :)
     filename = 'us.txt'
@@ -628,7 +628,7 @@ def load_us():
     print("For the dates encompassing Jan-22 to May-09:")
     print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
     print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-    print(" <> The " + country_name + " has " + str(
+    print(" <> " + country_name + " has " + str(
         percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
     print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
     print('')
