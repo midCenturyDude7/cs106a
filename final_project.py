@@ -37,14 +37,21 @@ DATA_DIR_KAZAKHSTAN = 'confirmed/kazakhstan.txt'
 DATA_DIR_GERMANY = 'confirmed/germany.txt'
 DATA_DIR_ARGENTINA = 'confirmed/argentina.txt'
 DATA_DIR_US = 'confirmed/us.txt'
+DATA_DIR_INDIA = 'confirmed/india.txt'
+DATA_DIR_SKOREA = 'confirmed/south korea.txt'
+DATA_DIR_JAPAN = 'confirmed/japan.txt'
+DATA_DIR_LEBANON = 'confirmed/lebanon.txt'
+DATA_DIR_MEXICO = 'confirmed/mexico.txt'
 
 TOTAL_CASES = 3877407
+
 
 def main():
 
     # Intro output to console
-    print("Welcome! You have access to COVID-19 data from Jan-22 to May-09 for the following ten countries:")
-    print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, Germany, Argentina, and the United States")
+    print("Welcome! You have access to COVID-19 data from Jan-22 to May-09 for the following fifteen countries:")
+    print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, Germany, Argentina, the United States, India, ")
+    print("South Korea, Japan, Lebanon, and Mexico")
     print("Check back soon, as more countries will be made available for review!")
     print('')
 
@@ -59,6 +66,11 @@ def main():
                            'Germany', 'germany',
                            'Argentina', 'argentina',
                            'United States', 'United states', 'US', 'us', 'united States', 'united states', 'USA', 'usa',
+                           'India', 'india',
+                           'South Korea', 'south korea',
+                           'Japan', 'japan',
+                           'Lebanon', 'lebanon',
+                           'Mexico', 'mexico',
                            'All', 'all']
 
     # Loop that asks user to enter country name to access COVID-19 data
@@ -115,8 +127,22 @@ def main():
         elif country_name == available_countries[24] or country_name == available_countries[25]:
             load_us()
 
-        # All Countries
         elif country_name == available_countries[26] or country_name == available_countries[27]:
+            load_india()
+
+        elif country_name == available_countries[28] or country_name == available_countries[29]:
+            load_skorea()
+
+        elif country_name == available_countries[30] or country_name == available_countries[31]:
+            load_japan()
+        #
+        # elif country_name == available_countries[32] or country_name == available_countries[33]:
+        #     load_lebanon
+        #
+        # elif country_name == available_countries[34] or country_name == available_countries[35]:
+
+        # All Countries
+        elif country_name == available_countries[36] or country_name == available_countries[37]:
             load_path()
 
         # Conditional for incorrect input
@@ -124,7 +150,8 @@ def main():
             print("You do not have access to that file yet! It will be available soon.")
             print("Please try again.")
             print("REMINDER: The following countries are currently available for review:")
-            print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, Germany, Argentina, and the United States")
+            print("Belarus, Brazil, Iran, Italy, Russia, Egypt, Kazakhstan, Germany, Argentina, the United States, ")
+            print("India, South Korea, Japan, Lebanon, and Mexico")
             print('')
 
 
@@ -598,7 +625,7 @@ def load_us():
     filename = 'us.txt'
     with open(DATA_DIR_US, 'r') as f:                           # Open the file and read it
         country_data = f.readlines()                            # Create a list from the array
-        country_data_updated= []                                # Empty list to manipulate data
+        country_data_updated = []                                # Empty list to manipulate data
         country_sum = 0                                         # Creating variable to count total number of cases
     for elem in country_data:                                   # Remove the newline character from the list
         country_data_updated.append(elem.strip())
@@ -635,6 +662,147 @@ def load_us():
         percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
     print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
     print('')
+
+
+def load_india():
+
+    country_name = 'India'
+
+    # File access and having fun with the data :)
+    filename = 'india.txt'
+    with open(DATA_DIR_INDIA, 'r') as f:
+        country_data = f.readlines()
+        country_data_updated = []
+        country_sum = 0
+    for elem in country_data:
+        country_data_updated.append(elem.strip())
+
+    new_cases = []
+    for i in range(len(country_data_updated) - 1):
+        if country_data_updated[i] != 0:
+            new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))
+
+    for i in range(0, len(new_cases)):
+        country_sum += int(new_cases[i])
+
+    max_country = max(new_cases)
+    country_zero_count = country_data_updated.count('0')
+    country_total_count = len(country_data_updated)
+
+    # Counts the total number of elements (days) in the list
+    country_confirmed_cases = country_total_count - country_zero_count
+
+    # Percentage of confirmed cases for country per all countries
+    percentage_of_country_confirmed = int((country_sum / TOTAL_CASES) * 100)
+
+    # Output to console
+    print("***FILE INFORMATION FOR INDIA.TXT***")
+    print("You've accessed the file: " + filename)
+    print("It is located in a relative directory in the following path: " + DATA_DIR_INDIA)
+    print("The file, " + filename + " contains " + str(country_total_count) + " total days")
+    print('')
+    print("***COVID-19 DATA FOR INDIA***")
+    print("For the dates encompassing Jan-22 to May-09:")
+    print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+    print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+    print(" <> " + country_name + " has " + str(
+        percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+    print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+    print('')
+
+
+def load_skorea():
+
+    country_name = 'South Korea'
+
+    # File access and having fun with the data :)
+    filename = 'south korea.txt'
+    with open(DATA_DIR_SKOREA, 'r') as f:
+        country_data = f.readlines()
+        country_data_updated = []
+        country_sum = 0
+        for elem in country_data:
+            country_data_updated.append(elem.strip())
+
+        new_cases = []
+        for i in range(len(country_data_updated) - 1):
+            if country_data_updated[i] != 0:
+                new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))
+
+        for i in range(0, len(new_cases)):
+            country_sum += int(new_cases[i])
+
+        max_country = max(new_cases)
+        country_zero_count = country_data_updated.count('0')
+        country_total_count = len(country_data_updated)
+
+        # Counts the total number of elements (days) in the list
+        country_confirmed_cases = country_total_count - country_zero_count
+
+        # Percentage of confirmed cases for country per all countries
+        percentage_of_country_confirmed = float((country_sum / TOTAL_CASES) * 100)
+
+    # Output to console
+    print("***FILE INFORMATION FOR SOUTH KOREA.TXT***")
+    print("You've accessed the file: " + filename)
+    print("It is located in a relative directory in the following path: " + DATA_DIR_SKOREA )
+    print("The file, " + filename + " contains " + str(country_total_count) + " total days")
+    print('')
+    print("***COVID-19 DATA FOR SOUTH KOREA***")
+    print("For the dates encompassing Jan-22 to May-09:")
+    print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+    print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+    print(" <> " + country_name + " has " + str(
+        percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+    print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+    print('')
+
+
+def load_japan():
+
+    country_name = 'Japan'
+
+    # File access and having fun with the data :)
+    filename = 'japan.txt'
+    with open(DATA_DIR_JAPAN, 'r') as f:
+        country_data = f.readlines()
+        country_data_updated = []
+        country_sum = 0
+        for elem in country_data:
+            country_data_updated.append(elem.strip())
+
+        new_cases = []
+        for i in range(len(country_data_updated) - 1):
+            if country_data_updated[i] != 0:
+                new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))
+
+        for i in range(0,len(new_cases)):
+            country_sum += int(new_cases[i])
+
+        max_country = max(new_cases)
+        country_zero_count = country_data_updated.count('0')
+        country_total_count = len(country_data_updated)
+
+        # Counts the total number of elements (days) in the list
+        country_confirmed_cases = country_total_count - country_zero_count
+
+        # Percentage of confirmed cases for country per all countries
+        percentage_of_country_confirmed = float((country_sum / TOTAL_CASES) * 100)
+
+        # Output to console
+        print("***FILE INFORMATION FOR JAPAN.TXT***")
+        print("You've accessed the file: " + filename)
+        print("It is located in a relative directory in the following path: " + DATA_DIR_JAPAN)
+        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
+        print('')
+        print("***COVID-19 DATA FOR JAPAN***")
+        print("For the dates encompassing Jan-22 to May-09:")
+        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
+        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
+        print(" <> " + country_name + " has " + str(
+            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
+        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print('')
 
 
 if __name__ == '__main__':
