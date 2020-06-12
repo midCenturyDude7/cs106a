@@ -249,6 +249,11 @@ def load_belarus():
         # Percentage of confirmed cases for country per all countries
         percentage_of_country_confirmed = float((country_sum / TOTAL_CASES) * 100)
 
+        # Attempting to add a dateline to each day's case/line
+        # date_line_list = []
+        # for line in country_data_updated:
+        #     date_line_list.append(line.split(str(datetime(2020, 1, 22))))
+
         # Output to console
         print("***FILE INFORMATION FOR BELARUS.TXT***")
         print("You've accessed the file: " + filename)
@@ -263,6 +268,9 @@ def load_belarus():
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
         print('')
+
+        # Testing date line
+        # print(datetime(date_line_list))
 
 
 def load_brazil():
