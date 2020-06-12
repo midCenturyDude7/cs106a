@@ -24,6 +24,7 @@ gratitude - and that is an understatement.
 """
 
 import pathlib
+from datetime import datetime
 
 # Constants for each country's file that contains all confirmed cases from Jan-22 to May-09
 DATA_DIR = 'confirmed/'
@@ -75,7 +76,8 @@ def main():
 
     # Loop that asks user to enter country name to access COVID-19 data
     while True:
-        country_name = input("Choose an available country, or type 'All' for COVID-19 data on all 182 countries combined: ")
+        country_name = input("Choose an available country, or type 'All' for COVID-19 data "
+                             "on all 182 countries combined: ")
         print('')
 
         # Belarus
@@ -168,6 +170,21 @@ def load_path():
         if path.is_file():                                                  # dimensional array, data_list
             with open(str(path), 'r') as f:
                 current_file = f.readlines()
+                date_line_list = []
+                for line in current_file:
+                    line.split()
+                    first_day = datetime(2020, 1, 22)
+                    date_line_list.append(first_day)
+                    # date_line_list_updated = []
+                    # for day in date_line_list:
+                    #     day += str(first_day)
+                    #     date_line_list_updated.append(day)
+
+                print("The first day of this file had " + current_file[0] + " cases that "
+                      "occurred on the following date: " + str(first_day))
+                # print("The last day of this file had " + current_file[-1] + " cases that "
+                #       "occurred on the following date: " + str(day))
+
                 for elem in current_file:
                     data_list.append(elem.strip())
 
