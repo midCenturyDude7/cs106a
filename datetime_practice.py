@@ -14,7 +14,32 @@ DATA_DIR = 'confirmed/us.txt'
 
 def main():
 
-    pass
+    # List for the currently available countries / file access
+    available_countries = ['United States', 'United states', 'US', 'us',
+                           'united States', 'united states', 'USA', 'usa'
+                           ]
+
+    while True:
+        country_name = input("Enter the country: ")
+
+        # United States
+        if country_name == available_countries[0] or country_name == available_countries[1]:
+            load_us()
+
+        elif country_name == available_countries[2] or country_name == available_countries[3]:
+            load_us()
+
+        elif country_name == available_countries[4] or country_name == available_countries[5]:
+            load_us()
+
+        elif country_name == available_countries[6] or country_name == available_countries[7]:
+            load_us()
+
+        # Conditional for incorrect input
+        else:
+            print("You do not have access to that file yet! It will be available soon.")
+            print("Please try again.")
+            print('')
 
 
 def load_us():
