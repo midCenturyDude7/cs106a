@@ -10,11 +10,13 @@ with one country file as an example/milestone.
 
 # Import libraries
 import pathlib
+import pandas as pd
 from datetime import datetime
 
 # Constants for the country's file that contains all confirmed cases from Jan-22 to May-09
 DATA_DIR_US = 'confirmed/us.txt'
 TOTAL_CASES = 3877407
+
 
 def main():
 
@@ -52,45 +54,17 @@ def load_us():
 
     # File access and having fun with the data :)
     filename = 'us.txt'
-    with open(DATA_DIR_US, 'r') as f:                           # Open the file and read it
-        country_data = f.readlines()                            # Create a list from the array
-        country_data_updated = []                               # Empty list to manipulate data
-        country_sum = 0                                         # Creating variable to count total number of cases
-        for elem in country_data:                               # Remove the newline character from the list
-            country_data_updated.append(elem.strip())
 
-        new_cases = []                                          # Create an empty list to capture the DoD difference
-        for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
-            if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
-                new_cases.append(int(country_data_updated[i+1]) - int(country_data_updated[i]))  # on a day-to day basis
+    file = DATA_DIR_US
 
-        for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
-            country_sum += int(new_cases[i])
+    df = pd.read_csv(file)
+    print(df.head())
 
-        max_country = max(new_cases)                            # Locates the max value in the list
-        country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
-        country_total_count = len(country_data_updated)         # Counts the total number of elements (days) in the list
-
-        # Counts the total number of elements (days) in the list
-        country_confirmed_cases = country_total_count - country_zero_count
-
-        # Percentage of confirmed cases for country per all countries
-        percentage_of_country_confirmed = int((country_sum / TOTAL_CASES) * 100)
-
-        # Output to console
-        print("***FILE INFORMATION FOR US.TXT***")
-        print("You've accessed the file: " + filename)
-        print("It is located in a relative directory in the following path: " + DATA_DIR_US )
-        print("The file, " + filename + " contains " + str(country_total_count) + " total days")
-        print('')
-        print("***COVID-19 DATA FOR USA***")
-        print("For the dates encompassing Jan-22 to May-09:")
-        print(" <> The total number of days with confirmed cases is: " + str(country_confirmed_cases))
-        print(" <> The overall total number of confirmed cases is: " + str(country_sum))
-        print(" <> " + country_name + " has " + str(
-            percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
-        print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
-        print('')
+    # with open(file, 'r') as file:
+    #     for line in file:
+    #         line = line.strip()
+    #         num_us = line.split()
+    #         print(num_us)
 
 
 if __name__ == '__main__':
