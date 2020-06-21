@@ -10,6 +10,7 @@ with one country file as an example/milestone.
 
 # Import libraries
 import pathlib
+from glob import glob
 import pandas as pd
 from datetime import datetime
 
@@ -58,13 +59,25 @@ def load_us():
     file = DATA_DIR_US
 
     df = pd.read_csv(file)
-    print(df.head())
+    df.columns = ['Cases']
+
+    date_series = pd.date_range(start='01/22/20', end="05/10/20", freq='D')
+    df_dates = pd.DataFrame()
+    df_dates['Date'] = date_series
+
+    df_update = pd.concat([df_dates, df], axis=1)
+    date_line = df_update.iloc[df_update['Date'] == '2020-01-30']
+    print(date_line)
 
     # with open(file, 'r') as file:
     #     for line in file:
-    #         line = line.strip()
+    #         line = line.strip().split()
     #         num_us = line.split()
     #         print(num_us)
+
+    # glob example
+    # filenames = glob('*.txt')
+    # dataframes = [pd.read_csv(f) for f in filenames]
 
 
 if __name__ == '__main__':
