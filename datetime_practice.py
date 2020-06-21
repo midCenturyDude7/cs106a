@@ -66,8 +66,11 @@ def load_us():
     df_dates['Date'] = date_series
 
     df_update = pd.concat([df_dates, df], axis=1)
-    date_line = df_update.iloc[df_update['Date'] == '2020-01-30']
-    print(date_line)
+    print("On " + str(df_update.at[8, 'Date']) + " there were " + str(df_update.at[8, 'Cases']) +
+          " confirmed cases of COVID-19.")
+
+    # date_line = df_update.loc[df_update['Date'] == '2020-01-30']
+    # print(date_line)
 
     # with open(file, 'r') as file:
     #     for line in file:
