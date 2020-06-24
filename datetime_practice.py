@@ -51,7 +51,7 @@ def main():
 
 def load_us():
 
-    country_name = 'The United States'
+    country_name = 'United States'
 
     # File access and having fun with the data :)
     filename = 'us.txt'
@@ -61,13 +61,17 @@ def load_us():
     df = pd.read_csv(file)
     df.columns = ['Cases']
 
-    date_series = pd.date_range(start='01/22/20', end="05/10/20", freq='D')
+    first_date = '1-22-20'
+    end_date = '5-10-20'
+    date_series = pd.date_range(start=first_date, end=end_date, freq='D')
     df_dates = pd.DataFrame()
     df_dates['Date'] = date_series
+    df_dates_updated = df_dates
+    df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
 
-    df_update = pd.concat([df_dates, df], axis=1)
+    df_update = pd.concat([df_dates_updated, df], axis=1)
     print("On " + str(df_update.at[8, 'Date']) + " there were " + str(df_update.at[8, 'Cases']) +
-          " confirmed cases of COVID-19.")
+          " confirmed cases of COVID-19 in the " + country_name + ".")
 
     # date_line = df_update.loc[df_update['Date'] == '2020-01-30']
     # print(date_line)
