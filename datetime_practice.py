@@ -56,9 +56,7 @@ def load_us():
     # File access and having fun with the data :)
     filename = 'us.txt'
 
-    file = DATA_DIR_US
-
-    df = pd.read_csv(file)
+    df = pd.read_csv(DATA_DIR_US)
     df.columns = ['Cases']
 
     first_date = '1-22-20'
@@ -70,9 +68,10 @@ def load_us():
     df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
 
     df_update = pd.concat([df_dates_updated, df], axis=1)
-    print("On " + str(df_update.at[8, 'Date']) + " there were " + str(df_update.at[8, 'Cases']) +
+    print("On " + str(df_update.at[25, 'Date']) + " there were " + str(df_update.at[25, 'Cases']) +
           " confirmed cases of COVID-19 in the " + country_name + ".")
 
+    print(df_update.info())
     # date_line = df_update.loc[df_update['Date'] == '2020-01-30']
     # print(date_line)
 
