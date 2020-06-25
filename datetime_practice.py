@@ -16,6 +16,8 @@ from datetime import datetime
 
 # Constants for the country's file that contains all confirmed cases from Jan-22 to May-09
 DATA_DIR_US = 'confirmed/us.txt'
+DATA_DIR_BRZ = 'confirmed/brazil.txt'
+
 TOTAL_CASES = 3877407
 
 
@@ -24,6 +26,7 @@ def main():
     # List for the currently available countries / file access
     available_countries = ['United States', 'United states', 'US', 'us',
                            'united States', 'united states', 'USA', 'usa'
+                           'Brazil', 'brazil'
                            ]
 
     while True:
@@ -42,6 +45,10 @@ def main():
         elif country_name == available_countries[6] or country_name == available_countries[7]:
             load_us()
 
+        # Brazil
+        elif country_name == available_countries[8] or country_name == available_countries[9]:
+            load_brazil()
+        
         # Conditional for incorrect input
         else:
             print("You do not have access to that file yet! It will be available soon.")
@@ -61,6 +68,7 @@ def load_us():
 
     first_date = '1-22-20'
     end_date = '5-10-20'
+
     date_series = pd.date_range(start=first_date, end=end_date, freq='D')
     df_dates = pd.DataFrame()
     df_dates['Date'] = date_series
@@ -68,18 +76,32 @@ def load_us():
     df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
 
     df_update = pd.concat([df_dates_updated, df], axis=1)
-    print("On " + str(df_update.at[25, 'Date']) + " there were " + str(df_update.at[25, 'Cases']) +
+    print("On " + str(df_update.at[77, 'Date']) + " there were " + str(df_update.at[77, 'Cases']) +
           " confirmed cases of COVID-19 in the " + country_name + ".")
 
-    print(df_update.info())
-    # date_line = df_update.loc[df_update['Date'] == '2020-01-30']
-    # print(date_line)
 
-    # with open(file, 'r') as file:
-    #     for line in file:
-    #         line = line.strip().split()
-    #         num_us = line.split()
-    #         print(num_us)
+def load_brazil():
+
+    country_name = 'Brazil'
+
+    # File access and having fun with the data :)
+    filename = 'brazil.txt'
+
+    df = pd.read_csv(DATA_DIR_BRZ)
+    df.columns = ['Cases']
+
+    first_date = '1-22-20'
+    end_date = '5-10-20'
+
+    date_series = pd.date_range(start=first_date, end=end_date, freq='D')
+    df_dates = pd.DataFrame()
+    df_dates['Date'] = date_series
+    df_dates_updated = df_dates
+    df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+    df_update = pd.concat([df_dates_updated, df], axis=1)
+    print("On " + str(df_update.at[77, 'Date']) + " there were " + str(df_update.at[77, 'Cases']) + 
+          " confirmed cases of COVID-19 in " + country_name + ".")
 
     # glob example
     # filenames = glob('*.txt')
