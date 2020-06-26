@@ -116,7 +116,7 @@ def load_mexico():
 
     # File access and having fun with the data :)
     with open(DATA_DIR_MEX, 'r') as f:
-        country_data = f.readlines()
+        country_data = f.readlines()                                                # Returns a list containing lines from the file
         country_data_updated = []                                                   # Create empty list to 'import' data into and format
         for elem in country_data:                                                   # Iterate through the list and remove '\n' character
             country_data_updated.append(elem.strip())
@@ -133,7 +133,7 @@ def load_mexico():
         df_dates_updated = df_dates                                                 # Create new dataframe to format datetime stamp
         df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')         # Remove timestamp and format date to follow Jan-01-20
 
-        df_update = pd.concat([df_dates_updated, df], axis=1)                       # Concatenate the dataframes to combine 'Date' and 'Cases' columns
+        df_update = pd.concat([df_dates_updated, df], axis=1)                       # Concatenate the dataframes to combine 'Date' and 'Cases' columns into one dataframe
         
         # Print result to console
         print("On " + str(df_update.at[108, 'Date']) + " there were " + str(df_update.at[108, 'Cases']) + 
