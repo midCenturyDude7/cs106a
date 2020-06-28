@@ -18,6 +18,7 @@ from datetime import datetime
 DATA_DIR_US = 'confirmed/us.txt'
 DATA_DIR_BRA = 'confirmed/brazil.txt'
 DATA_DIR_MEX = 'confirmed/mexico.txt'
+DATA_DIR_SPN = 'confirmed/spain.txt'
 
 TOTAL_CASES = 3877407
 
@@ -28,7 +29,8 @@ def main():
     available_countries = ['United States', 'United states', 'US', 'us',
                            'united States', 'united states', 'USA', 'usa'
                            'Brazil', 'brazil',
-                           'Mexico', 'mexico'
+                           'Mexico', 'mexico',
+                           'Spain', 'spain'
                            ]
 
     while True:
@@ -54,6 +56,10 @@ def main():
         # Mexico
         elif country_name == available_countries[10] or country_name == available_countries[11]:
             load_mexico()
+        
+        # Spain
+        elif country_name == available_countries[12] or country_name == available_countries[13]:
+            load_spain()
         
         # Conditional for incorrect input
         else:
@@ -147,6 +153,35 @@ def load_mexico():
 
         df_update = pd.concat([df_dates_updated, df], axis=1)                   # Concatenate the dataframes to combine 'Date' and 'Cases' columns into one dataframe
         
+        # Print result to console
+        print("On " + str(df_update.at[108, 'Date']) + " there were " + str(df_update.at[108, 'Cases']) + 
+          " confirmed cases of COVID-19 in " + country_name + ".")
+
+
+def load_spain():
+
+    country_name = "Spain"
+
+    with open(DATA_DIR_SPN, 'r') as f:
+        country_data = f.readlines()
+        country_data_updated = []
+        for elem in country_data:
+            country_data_updated.append(elem.strip())
+        
+        df = pd.DataFrame(data=country_data_updated)
+        df.columns = ['Cases']
+
+        first_date = '1-22-20'
+        end_data = '5-9-20'
+
+        date_series = pd.date_range(start=first_date, end=end_data, freq='D')
+        df_dates = pd.DataFrame()
+        df_dates['Date'] = date_series
+        df_dates_updated = df_dates
+        df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+        df_update = pd.concat([df_dates_updated, df], axis=1)
+
         # Print result to console
         print("On " + str(df_update.at[108, 'Date']) + " there were " + str(df_update.at[108, 'Cases']) + 
           " confirmed cases of COVID-19 in " + country_name + ".")
