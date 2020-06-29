@@ -26,6 +26,7 @@ gratitude - and that is an understatement.
 # Import libraries
 import pathlib
 from datetime import datetime
+import pandas as pd
 
 # Constants for each country's file that contains all confirmed cases from Jan-22 to May-09
 DATA_DIR = 'confirmed/'
@@ -233,6 +234,20 @@ def load_belarus():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
+        df = pd.DataFrame(data=country_data_updated)
+        df.columns = ['Cases']
+
+        first_date = '1-22-20'
+        end_date = '5-9-20'
+
+        date_series = pd.date_range(start=first_date, end=end_date, freq='D')
+        df_dates = pd.DataFrame()
+        df_dates['Date'] = date_series
+        df_dates_updated = df_dates
+        df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+        df_update = pd.concat([df_dates_updated, df], axis=1)
+
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
             if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
@@ -268,6 +283,8 @@ def load_belarus():
         print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print(" <> On " + str(df_update.at[108, 'Date']) + " there were " + str(df_update.at[108, 'Cases']) +
+              " confirmed cases of COVID-19 in the " + country_name + ".")
         print('')
 
         # Testing date line
