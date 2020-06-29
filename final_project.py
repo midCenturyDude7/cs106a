@@ -255,6 +255,12 @@ def load_belarus():
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
+
+        df_new_cases = pd.DataFrame(data=new_cases)
+        df_new_cases.columns = ['New Cases']
+
+        df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
+
         max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
         country_total_count = len(country_data_updated)         # Counts the total number of elements (days) in the list
@@ -283,8 +289,9 @@ def load_belarus():
         print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
-        print(" <> On " + str(df_update.at[108, 'Date']) + " there were " + str(df_update.at[108, 'Cases']) +
-              " confirmed cases of COVID-19 in the " + country_name + ".")
+        print(" <> On " + str(df_update.at[105, 'Date']) + " there were a total of " + str(df_update.at[105, 'Cases']) +
+              " confirmed cases, and " + str(df_new_cases_updated.at[105, 'New Cases']) + " new cases of "
+              "COVID-19 in " + country_name + ".")
         print('')
 
         # Testing date line
