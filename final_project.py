@@ -26,6 +26,7 @@ gratitude - and that is an understatement.
 # Import libraries
 import pathlib
 from datetime import datetime
+from glob import glob
 import pandas as pd
 
 # Constants for each country's file that contains all confirmed cases from Jan-22 to May-09
@@ -172,23 +173,15 @@ def load_path():
         if path.is_file():                                                  # dimensional array, data_list
             with open(str(path), 'r') as f:
                 current_file = f.readlines()
-                date_line_list = []
-                for line in current_file:
-                    line.split()
-                    first_day = datetime(2020, 1, 22)
-                    date_line_list.append(first_day)
-                    # date_line_list_updated = []
-                    # for day in date_line_list:
-                    #     day += str(first_day)
-                    #     date_line_list_updated.append(day)
-
-                print("The first day of this file had " + current_file[0] + " cases that "
-                      "occurred on the following date: " + str(first_day))
-                # print("The last day of this file had " + current_file[-1] + " cases that "
-                #       "occurred on the following date: " + str(day))
-
+                data_list = []
                 for elem in current_file:
                     data_list.append(elem.strip())
+
+                df = pd.DataFrame(data=data_list)
+                df.columns = ['Cases']
+
+                filenames = glob('*.txt')
+                dataframes = [pd.read_csv(f) for f in filenames]
 
     new_cases_total = []                                                    # Initializes list to store newly confirmed
     total_countries_sum = 0                                                 # cases
@@ -218,6 +211,8 @@ def load_path():
         max_total_all) + " cases -- which occurred in the United States")
     print(" <> The overall total number of confirmed cases is: " + str(
         total_countries_sum))
+    print('')
+    # print(df.info())
     print('')
 
 
@@ -310,7 +305,21 @@ def load_brazil():
         country_sum = 0                                         # Creating variable to count total number of cases
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
+        
+        df = pd.DataFrame(data=country_data_updated)
+        df.columns = ['Cases']
 
+        first_date = '1-22-20'
+        end_date = '5-9-20'
+
+        date_series = pd.date_range(start=first_date, end=end_date, freq='D')
+        df_dates = pd.DataFrame()
+        df_dates['Date'] = date_series
+        df_dates_updated = df_dates
+        df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+        df_update = pd.concat([df_dates_updated, df], axis=1)
+                
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
             if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
@@ -318,6 +327,11 @@ def load_brazil():
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
+
+        df_new_cases = pd.DataFrame(data=new_cases)
+        df_new_cases.columns = ['New Cases']
+
+        df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
 
         max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
@@ -342,6 +356,9 @@ def load_brazil():
         print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print(" <> On " + str(df_update.at[105, 'Date']) + " there were a total of " + str(df_update.at[105, 'Cases']) +
+              " confirmed cases, and " + str(df_new_cases_updated.at[105, 'New Cases']) + " new cases of "
+              "COVID-19 in " + country_name + ".")
         print('')
 
 
