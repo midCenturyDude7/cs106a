@@ -229,7 +229,7 @@ def load_belarus():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
-        df = pd.DataFrame(data=country_data_updated)
+        df = pd.DataFrame(country_data_updated)
         df.columns = ['Cases']
 
         first_date = '1-22-20'
@@ -251,7 +251,7 @@ def load_belarus():
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
 
-        df_new_cases = pd.DataFrame(data=new_cases)
+        df_new_cases = pd.DataFrame(new_cases)
         df_new_cases.columns = ['New Cases']
 
         df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
@@ -265,11 +265,6 @@ def load_belarus():
 
         # Percentage of confirmed cases for country per all countries
         percentage_of_country_confirmed = float((country_sum / TOTAL_CASES) * 100)
-
-        # Attempting to add a dateline to each day's case/line
-        # date_line_list = []
-        # for line in country_data_updated:
-        #     date_line_list.append(line.split(str(datetime(2020, 1, 22))))
 
         # Output to console
         print("***FILE INFORMATION FOR BELARUS.TXT***")
@@ -306,7 +301,7 @@ def load_brazil():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
         
-        df = pd.DataFrame(data=country_data_updated)
+        df = pd.DataFrame(country_data_updated)
         df.columns = ['Cases']
 
         first_date = '1-22-20'
@@ -328,7 +323,7 @@ def load_brazil():
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
 
-        df_new_cases = pd.DataFrame(data=new_cases)
+        df_new_cases = pd.DataFrame(new_cases)
         df_new_cases.columns = ['New Cases']
 
         df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
@@ -375,7 +370,7 @@ def load_iran():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
-        df = pd.DataFrame(data=country_data_updated)
+        df = pd.DataFrame(country_data_updated)
         df.columns = ['Cases']
 
         first_date = '1-22-20'
@@ -397,7 +392,7 @@ def load_iran():
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
 
-        df_new_cases = pd.DataFrame(data=new_cases)
+        df_new_cases = pd.DataFrame(new_cases)
         df_new_cases.columns = ['New Cases']
 
         df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
@@ -444,7 +439,7 @@ def load_italy():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
-        df = pd.DataFrame(data=country_data_updated)
+        df = pd.DataFrame(country_data_updated)
         df.columns = ['Cases']
 
         first_date = '1-22-20'
@@ -466,7 +461,7 @@ def load_italy():
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
 
-        df_new_cases = pd.DataFrame(data=new_cases)
+        df_new_cases = pd.DataFrame(new_cases)
         df_new_cases.columns = ['New Cases']
 
         df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
@@ -513,6 +508,20 @@ def load_russia():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
+        df = pd.DataFrame(country_data_updated)
+        df.columns = ['Cases']
+
+        first_date = '01-22-20'
+        end_date = '05-09-20'
+
+        date_series = pd.date_range(start=first_date, end=end_date, freq='D')
+        df_dates = pd.DataFrame()
+        df_dates['Date'] = date_series
+        df_dates_updated = df_dates
+        df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+        df_update = pd.concat([df_dates_updated, df], axis=1)
+
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
             if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
@@ -520,6 +529,11 @@ def load_russia():
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
+
+        df_new_cases = pd.DataFrame(new_cases)
+        df_new_cases.columns = ['New Cases']
+
+        df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
 
         max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
@@ -544,6 +558,9 @@ def load_russia():
         print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print(" <> On " + str(df_update.at[105, 'Date']) + ", there were a total of " + str(df_update.at[105, 'Cases']) +
+              " confirmed cases, including " + str(df_new_cases_updated.at[105, 'New Cases']) + " new cases of "
+              "COVID-19 in " + country_name + ".")
         print('')
 
 
@@ -736,7 +753,7 @@ def load_argentina():
 
 def load_us():
 
-    country_name = 'The United States'
+    country_name = 'the United States'
 
     # File access and having fun with the data :)
     filename = 'us.txt'
@@ -747,6 +764,20 @@ def load_us():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
+        df = pd.DataFrame(country_data_updated)
+        df.columns = ['Cases']
+
+        first_date = '01-22-20'
+        end_date = '05-09-20'
+
+        date_series = pd.date_range(start=first_date, end=end_date, freq='D')
+        df_dates = pd.DataFrame()
+        df_dates['Date'] = date_series
+        df_dates_updated = df_dates
+        df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+        df_update = pd.concat([df_dates_updated, df], axis=1)
+
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
             if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
@@ -754,6 +785,11 @@ def load_us():
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
+
+        df_new_cases = pd.DataFrame(new_cases)
+        df_new_cases.columns = ['New Cases']
+
+        df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
 
         max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
@@ -778,6 +814,9 @@ def load_us():
         print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print(" <> On " + str(df_update.at[105, 'Date']) + ", there were a total of " + str(df_update.at[105, 'Cases']) +
+              " confirmed cases, including " + str(df_new_cases_updated.at[105, 'New Cases']) + " new cases of "
+              "COVID-19 in " + country_name + ".")
         print('')
 
 
