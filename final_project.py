@@ -1128,6 +1128,20 @@ def load_lebanon():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
+        df = pd.DataFrame(country_data_updated)
+        df.columns = ['Cases']
+
+        first_date = '01-22-20'
+        end_date = '05-09-20'
+
+        date_series = pd.date_range(start=first_date, end=end_date, freq='D')
+        df_dates = pd.DataFrame()
+        df_dates['Date'] = date_series
+        df_dates_updated = df_dates
+        df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+        df_update = pd.concat([df_dates_updated, df], axis=1)
+        
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
             if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
@@ -1135,6 +1149,11 @@ def load_lebanon():
 
         for i in range(0, len(new_cases)):                      # Find the total number of cases for the country
             country_sum += int(new_cases[i])
+
+        df_new_cases = pd.DataFrame(new_cases)
+        df_new_cases.columns = ['New Cases']
+
+        df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
 
         max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
@@ -1159,6 +1178,9 @@ def load_lebanon():
         print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print(" <> On " + str(df_update.at[99, 'Date']) + ", there were a total of " + str(df_update.at[99, 'Cases']) + 
+                " confired cases, including " + str(df_new_cases_updated.at[99, 'New Cases']) + " new cases of "
+                "COVID-19 in " + country_name + ".")
         print('')
 
 
@@ -1175,6 +1197,20 @@ def load_mexico():
         for elem in country_data:                               # Remove the newline character from the list
             country_data_updated.append(elem.strip())
 
+        df = pd.DataFrame(country_data_updated)
+        df.columns = ['Cases']
+
+        first_date = '01-22-20'
+        end_date = '05-09-20'
+
+        date_series = pd.date_range(start=first_date, end=end_date, freq='D')
+        df_dates = pd.DataFrame()
+        df_dates['Date'] = date_series
+        df_dates_updated = df_dates
+        df_dates_updated['Date'] = df_dates['Date'].dt.strftime('%b-%d-%Y')
+
+        df_update = pd.concat([df_dates_updated, df], axis=1)
+
         new_cases = []                                          # Create an empty list to capture the DoD difference
         for i in range(len(country_data_updated) - 1):          # Iterate over the updated country data to eliminate
             if country_data_updated[i] != 0:                    # non-zero days and capture the difference in cases
@@ -1182,6 +1218,11 @@ def load_mexico():
 
         for i in range(0, len(new_cases)):                      # Counts the number days with unconfirmed cases
             country_sum += int(new_cases[i])
+
+        df_new_cases = pd.DataFrame(new_cases)
+        df_new_cases.columns = ['New Cases']
+
+        df_new_cases_updated = pd.concat([df_dates_updated, df_new_cases], axis=1)
 
         max_country = max(new_cases)                            # Locates the max value in the list
         country_zero_count = country_data_updated.count('0')    # Counts the number days with unconfirmed cases
@@ -1206,6 +1247,9 @@ def load_mexico():
         print(" <> " + country_name + " has " + str(
             percentage_of_country_confirmed) + "% of all confirmed cases worldwide")
         print(" <> The day with the most number of confirmed cases registered a total of: " + str(max_country))
+        print(" <> On " + str(df_update.at[101, 'Date']) + ", there were a total of " + str(df_update.at[101, 'Cases']) + 
+                " confirmed cases, including " + str(df_new_cases_updated.at[101, 'New Cases']) + " new cases of "
+                "COVID-19 in " + country_name + ".")
         print('')
 
 
